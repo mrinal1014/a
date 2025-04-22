@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="home-container">
+    <!-- Welcome Section -->
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p>Explore career opportunities with our AI-powered chatbot.</p>
+
+    <!-- Buttons -->
+    <div class="buttons">
+        <a href="{% url 'chat' %}" class="btn">Go to Chatbot</a>
+        <a href="{% url 'logout' %}" class="btn logout">Logout</a>
+    </div>
+
+    <!-- Adamas University Section -->
+    <img src="{% static 'images/logo.png' %}" alt="Adamas University Logo" id="logo">
+    <h1>Adamas University</h1>
+    <h2>Mini Project - 4th Semester</h2>
+    <h3>Mentor: Debashree Mitra</h3>
+
+    <!-- Mentor Photo -->
+    <div class="mentor-section">
+        <div class="photo-frame">
+            <img src="{% static 'images/mentor.jpeg' %}" alt="Mentor Photo">
+        </div>
+        <p class="photo-caption">Mentor: Debashree Mitra</p>
+    </div>
+
+    <!-- Members Section -->
+    <div class="members-section">
+        <h2>Project Members</h2>
+        <div class="members-grid">
+            <!-- Repeat this block for each member -->
+            <div class="member-card">
+                <div class="photo-frame">
+                    <img src="{% static 'images/member1.jpg' %}" alt="Member 1">
+                </div>
+                <p class="member-name">🔹Mrinal Sahoo</p>
+                <p class="member-details">Roll No: UG/02/BTCSECSF/2023/023</p>
+                <p class="member-details">Section: E</p>
+            </div>
+
+            <div class="member-card">
+                <div class="photo-frame">
+                    <img src="{% static 'images/member2.jpg' %}" alt="Member 2">
+                </div>
+                <p class="member-name">🔹Soma Chatterjee</p>
+                <p class="member-details">Roll No: UG/02/BTCSECSF/2023/013</p>
+                <p class="member-details">Section: E</p>
+            </div>
+
+            <div class="member-card">
+                <div class="photo-frame">
+                    <img src="{% static 'images/member3.jpg' %}" alt="Member 3">
+                </div>
+                <p class="member-name">🔹Subhangkar Barui</p>
+                <p class="member-details">Roll No: UG/02/BTCSECSF/2023/021</p>
+                <p class="member-details">Section: E</p>
+            </div>
+
+            <div class="member-card">
+                <div class="photo-frame">
+                    <img src="{% static 'images/member4.jpg' %}" alt="Member 4">
+                </div>
+                <p class="member-name">🔹Saikat Pal</p>
+                <p class="member-details">Roll No: UG/02/BTCSECSF/2023/009</p>
+                <p class="member-details">Section: E</p>
+            </div>
+
+            <div class="member-card">
+                <div class="photo-frame">
+                    <img src="{% static 'images/member5.jpg' %}" alt="Member 5">
+                </div>
+                <p class="member-name">🔹Arindam Jana</p>
+                <p class="member-details">Roll No: UG/02/BTCSECSF/2023/002</p>
+                <p class="member-details">Section: E</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

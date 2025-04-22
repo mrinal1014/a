@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="chat-container">
+    <h2>Career Chatbot</h2>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Type a message..." />
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+function sendMessage() {
+    let userMessage = document.getElementById("user-input").value;
+    let chatBox = document.getElementById("chat-box");
+
+    if (userMessage.trim() === "") return;
+
+    // Display user message
+    chatBox.innerHTML += `<div class='user-message'>You: ${userMessage}</div>`;
+
+    // Send request to chatbot
+    fetch("{% url 'chatbot_response' %}", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "X-CSRFToken": "{{ csrf_token }}"
+        },
+        body: new URLSearchParams({ "message": userMessage })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.response) {
+            chatBox.innerHTML += `<div class='bot-message'>Bot: ${data.response}</div>`;
+        } else {
+            chatBox.innerHTML += `<div class='error-message'>Error: ${data.error}</div>`;
+        }
+        document.getElementById("user-input").value = "";
+    })
+    .catch(error => {
+        chatBox.innerHTML += `<div class='error-message'>Error: ${error}</div>`;
+    });
+}
+</script>
+{% endblock %}

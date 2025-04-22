@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+
+    <!-- ✅ Show error messages only inside the form -->
+    {% if messages %}
+    <div class="error-box">
+        {% for message in messages %}
+        <p class="{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Username</label>
+            <input type="text" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+</div>
+
+<!-- ✅ Add styles for error messages -->
+<style>
+    .error-box {
+        background-color: #ffdddd;
+        color: #d8000c;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #d8000c;
+        border-radius: 5px;
+    }
+</style>
+{% endblock %}

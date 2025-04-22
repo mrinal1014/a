@@ -1,0 +1,6 @@
+.chatbot-avatar img {
+    width: 500px;  /* Adjust the size (try 60px, 80px, or 100px based on your need) */
+    height: auto;  /* Maintain aspect ratio */
+    left: 5%; /* Positions it to the left side */
+    bottom: 10px; /* Aligns it near the chatbox */
+}

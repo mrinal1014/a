@@ -1,0 +1,59 @@
+def generate_tts_audio(text):
+    if not os.path.exists("media"):
+        os.makedirs("media")
+
+    # Clean the text for TTS by removing markdown formatting
+    clean_text = text
+    # Remove markdown formatting
+    clean_text = re.sub(r'\*\*(.*?)\*\*', r'\1', clean_text)  # Remove bold **text**
+    clean_text = re.sub(r'\*(.*?)\*', r'\1', clean_text)      # Remove italic *text*
+    clean_text = re.sub(r'```([\s\S]*?)```', r'\1', clean_text)  # Remove code blocks
+    clean_text = re.sub(r'`(.*?)`', r'\1', clean_text)        # Remove inline code
+    clean_text = re.sub(r'\[(.*?)\]\((.*?)\)', r'\1', clean_text)  # Replace links with just text
+    
+    # Other Markdown elements you might want to clean
+    clean_text = re.sub(r'#{1,6}\s+(.*?)$', r'\1', clean_text, flags=re.MULTILINE)  # Remove headings
+    clean_text = re.sub(r'- (.*?)$', r'\1', clean_text, flags=re.MULTILINE)  # Convert list items
+
+    print(f"Original text: {text[:50]}...")
+    print(f"Cleaned text for TTS: {clean_text[:50]}...")
+
+    eleven_api_key = os.getenv("ELEVENLABS_API_KEY")
+    
+    voice_id = "50YSQEDPA2vlOxhCseP4"
+    url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
+
+    headers = {
+        "xi-api-key": eleven_api_key,
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "text": clean_text,  # Use the cleaned text for TTS
+        "model_id": "eleven_multilingual_v2",
+        "voice_settings": {
+            "stability": 0.75,
+            "similarity_boost": 0.75,
+            "style":0.3,
+            "speed":1.0
+        }
+    }
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        print(f"TTS API response status: {response.status_code}")
+        
+        if response.status_code == 200:
+            audio_data = response.content
+            filename = f"tts_audio_{uuid.uuid4().hex}.mp3"
+            file_path = os.path.join("media", filename)
+            with open(file_path, "wb") as f:
+                f.write(audio_data)
+            print(f"Audio file created at: {file_path}")
+            return f"media/{filename}"  # Return a URL-friendly path
+        else:
+            print("TTS Error:", response.text)
+            return None
+    except Exception as e:
+        print("TTS Exception:", str(e))
+        return None 

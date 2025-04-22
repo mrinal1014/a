@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<header class="chatbot-header">
+    <h1>Welcome to Your AI Chatbot</h1>
+    <p>Meet your virtual assistant! This chatbot can:</p>
+    <ul>
+        <li>💼 Provide career guidance</li>
+        <li>📝 Help with resume building</li>
+        <li>🧠 Support mental well-being discussions</li>
+        <li>📚 Answer professional & personal development questions</li>
+    </ul>
+    <p>Click on the bot to start chatting!</p>
+</header>
+
+<div class="chat-wrapper">
+    <!-- Chatbot Avatar (Clickable to Open Chat) -->
+    <div id="chatbot-avatar">
+        <video id="botVideo" class="bot-video" autoplay muted loop>
+            <source src="{% static 'images/chatbot-girl.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Chat Container -->
+    <div class="chat-container hidden" id="chat-container">
+        <div class="chat-header">
+            <h2>MASSS CAREER LIMITED</h2>
+        </div>
+
+        <div id="chat-box" class="chat-box"></div>
+
+        <div class="chat-input">
+            <input type="text" id="user-input" placeholder="Type a message..." autocomplete="off">
+            <button id="send-btn" title="Send Text"><i class="fas fa-paper-plane"></i></button>
+            <button id="record-btn" title="Speak Message">🎤</button>
+        </div>
+        
+        <audio id="response-audio" controls hidden class="audio-player"></audio>
+        
+    </div>
+</div>
+
+<!-- Load JavaScript file -->
+<script src="{% static 'js/chat.js' %}"></script>
+
+{% endblock %}

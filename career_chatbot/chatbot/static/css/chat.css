@@ -1,0 +1,370 @@
+/* Chat Container */
+.chat-container {
+    width: 60%;
+    margin-left: -20px; /* Adjust distance from avatar */
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    display: relative;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+/* Chat Header */
+.chatbot-header {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    color: aquamarine; /* Text color */
+    padding: 20px;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    margin:20px 0;
+    width: 40%; /* Reduce width to half */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    margin-bottom: 10px; /* Reduce space below the header */
+    padding-bottom: 5px;
+    position: absolute; /* Positioning to shift */
+    right: 5%; /* Shift towards the right */
+    top: 100px; /* Adjust position from the top */
+}
+
+
+/* Style for List Inside Header */
+.chatbot-header ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    margin-bottom: 10px; 
+}
+
+.chatbot-header ul li {
+    font-size: 1.1rem;
+    margin: 5px 0;
+    text-align: center;
+}
+
+/* Responsive Design for Mobile Screens */
+@media screen and (max-width: 768px) {
+    .chatbot-header {
+        font-size: 1.1rem;
+        max-width: 95%;
+        padding: 15px;
+    }
+
+    .chatbot-header ul li {
+        font-size: 1rem;
+    }
+}
+
+/* Scrollable Chat Box */
+.chat-box {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    scrollbar-width: thin;
+    scrollbar-color: aquamarine rgba(255, 255, 255, 0.1);
+    word-wrap: break-word; /* Ensure long words break properly */
+    white-space: normal; /* Wrap text instead of scrolling */
+}
+/* Custom Scrollbar */
+.chat-box::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+    background: aquamarine;
+    border-radius: 10px;
+}
+
+.chat-box::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Chat Messages */
+.message.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: left;
+    border-radius: 12px 12px 12px 0;
+    padding: 10px;
+    max-width: 80%;
+    word-wrap: break-word; /* Ensures text doesn't overflow */
+    overflow-wrap: break-word; /* Additional safeguard */
+    white-space: pre-wrap; /* Keeps line breaks while preventing overflow */
+}
+html, body {
+    overflow-x: hidden; /* Stops horizontal scrolling */
+    width: 100%;
+    
+}
+
+/* User Message */
+.message.user {
+    align-self: flex-end;
+    background: #ff9900;
+    color: black;
+    text-align: left;
+    border-radius: 12px 12px 0 12px;
+}
+
+/* Bot Message */
+.message.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: left;
+    border-radius: 12px 12px 12px 0;
+}
+/* Chat Wrapper for positioning */
+.chat-wrapper {
+    display: flex;
+    align-items: self-end; /* Align chat with avatar */
+    position: fixed;
+    height: 90vh;
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+/* Click Effect */
+.chatbot-avatar:active {
+    transform: scale(0.95);
+}
+.bot-video {
+    position: relative;  /* Keeps it at the left */
+    right: 30%;         /* Adjust position to the left */
+    bottom: 100px;     /* Align it near the chatbox */
+    width: 300px;     /* Adjust the size */
+    height: auto;     /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: rounded corners */
+     /* Prevents clicks from affecting the bot */
+}
+
+
+
+
+
+/* Bot messages appear as if coming from the avatar */
+.message.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: left;
+    border-radius: 12px 12px 12px 0;
+    padding: 10px;
+    max-width: 80%;
+    font-weight: bold;
+}
+
+
+/* Bot message container */
+.message.bot {
+    display: flex;
+    align-items: flex-start;
+
+}
+
+
+
+/* Chat Input */
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.chat-input input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.chat-input button {
+    padding: 12px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #ff9900;
+    color: blue;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.chat-input button:hover {
+    background: #ff6600;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+    }
+    
+    .message {
+        max-width: 85%;
+    }
+}
+
+/* Style for bot messages */
+.message.bot {
+    align-self: flex-start;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    text-align: center;
+    border-radius: 12px 12px 12px 0;
+    padding: 10px;
+    max-width: 80%;
+}
+
+/* Ensure lists & preformatted text are readable */
+.bot .text strong {
+    color: aquamarine;
+    font-weight: bold;
+}
+
+.bot .text em {
+    font-style: italic;
+    color: #ddd;
+}
+
+.bot .text pre {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 5px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    color: aquamarine;
+}
+
+.bot .text code {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-family: monospace;
+    color: #ffcc00;
+}
+/* Avatar Position */
+.chatbot-avatar {
+    display: block;
+ /* Center the image */
+    position: relative;
+    top: -10px; /* Move it slightly up */
+    
+    height: auto;
+    cursor: pointer;
+    right: 350px; /* Moves it towards the left */
+    transition: transform 0.3s ease-in-out;
+
+    margin: 0 auto; /* Ensures it is centered */
+    
+    top: -50px; /* Move it up */
+    width: 120px; /* Adjust size */
+    
+    
+}
+
+/* Ensure animation works */
+.chatbot-avatar.show {
+    animation: chatbotPop 0.4s ease-out forwards;
+}
+
+/* Animation for pop effect */
+@keyframes chatbotPop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+/* Voice Input Button */
+.chat-input button#record-btn {
+    background: aquamarine;
+    color: #16213e;
+    font-size: 1.2rem;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chat-input button#record-btn:hover {
+    background: #7fffd4;
+}
+
+/* Audio player for bot response */
+.audio-player {
+    width: 100%;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+@media screen and (max-width: 768px) {
+    .chat-input {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .chat-input input {
+        width: 100%;
+    }
+
+    .chat-input button {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .audio-player {
+        width: 100%;
+    }
+}
+

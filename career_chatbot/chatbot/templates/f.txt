@@ -1,0 +1,9 @@
+function formatResponse(response) {
+        return response
+            .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>") // Bold (**text**)
+            .replace(/\*(.*?)\*/g, "<em>$1</em>") // Italics (*text*)
+            .replace(/```([\s\S]*?)```/g, "<pre>$1</pre>") // Code blocks (```)
+            .replace(/`(.*?)`/g, "<code>$1</code>") // Inline code (`text`)
+            .replace(/\n/g, "<br>") // New lines
+            .replace(/\* (.*?)<br>/g, "• $1<br>"); // Bullet points
+    }
